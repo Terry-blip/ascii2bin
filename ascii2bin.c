@@ -12,39 +12,28 @@
 #include "stdlib.h"
 #include <unistd.h>
 
-#define max_int (255)
 #define byte (char)
 
 int main (int argc, char * argv[], char ** envp) {
 
-  read(0, header, 4);
-  
-  char header[count];
-  int sum = 0;   
-  unsigned char checksum;
-  unsigned char complement;
-  
-
-  
-    offset = ?;
-    number = 0;
+    char digit = 0;
+    int offset = ?;
+    int number = 0;
+    int bufferSize = 4;
+    char ascii_value[bufferSize];
     
-    retval = read(0, &ascii_value, 1);
-    while (retval == 1)
+    char retval = read(0, ascii_value, 1);
+
+    while (retval == 1 || retval == 0)
+    {
         digit = ascii_value - offset;
         number = number << 1 + digit;  
         retval = read(0, &ascii_value, 1);
-        
+
+        bufferSize = bufferSize + 4;
+    }
+
     printf("%d\n", number);
     return 0;
 
-  
- fprintf(stdout, "Stored Checksum: %d, Computed Checksum: %d\n", checksum, complement);
-
-  if (checksum != complement ) {
-    fprintf(stderr, "Error Detected!\n"); 
-    return 1;
-  }
-
-  return 0;
 }
