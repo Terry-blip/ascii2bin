@@ -41,7 +41,7 @@ int main (int argc, char * argv[], char ** envp) {
         retval = 0;
         }
 
-	if ((ascii_value != 0) && (ascii_value != 1)) {
+	if ((ascii_value != '0') && (ascii_value != '1') && (ascii_value != '\n')) {
 	retval = 0; 
 	printf("ERROR: NON 1 OR 0 INPUT\n");
 	error = true;
