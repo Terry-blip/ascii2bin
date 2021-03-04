@@ -12,6 +12,7 @@
 #include "stdlib.h"
 #include "math.h"
 #include <unistd.h>
+#include "stdbool.h"
 
 //#define byte char
 //#define byte unsigned char
@@ -24,6 +25,7 @@ int main (int argc, char * argv[], char ** envp) {
     int bufferSize = 8;
     char ascii_value;
     int retval;
+    bool error = false;
 
     retval = read(0, &ascii_value, 1);
 
@@ -39,9 +41,21 @@ int main (int argc, char * argv[], char ** envp) {
         retval = 0;
         }
 
+	if ((ascii_value != 0) && (ascii_value != 1)) {
+	retval = 0; 
+	printf("ERROR: NON 1 OR 0 INPUT\n");
+	error = true;
+	}
+
     }
+
+if (error == false) {
 
     printf("FINAL NUMBER: %u \n", number);
     return 0;
 
+    }
+else {
+return 1;
+}
 }
