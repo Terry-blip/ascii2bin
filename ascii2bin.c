@@ -26,10 +26,6 @@ int main (int argc, char * argv[], char ** envp) {
     int retval;
 
     retval = read(0, &ascii_value, 1);
-    printf("ret: %d\n", retval);
-
-    printf("read: %c\n", ascii_value);
-
 
     while (retval == 1)
     {
@@ -37,17 +33,10 @@ int main (int argc, char * argv[], char ** envp) {
         digit = ascii_value - offset;
         number = (number << 1) + digit;
 
-        printf("DIGIT: %d\n", digit);
-        printf("NUMBER: %d\n", number);
-
         retval = read(0, &ascii_value, 1);
-
-        printf("read: %c\n", ascii_value);
-        printf("ret: %d\n", retval);
 
         if (ascii_value == '\n') {
         retval = 0;
-        printf("ret FORCE ZERO: %d\n", retval);
         }
 
     }
