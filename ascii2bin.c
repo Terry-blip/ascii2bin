@@ -10,30 +10,49 @@
 
 #include "stdio.h"
 #include "stdlib.h"
+#include "math.h"
 #include <unistd.h>
 
-#define byte (char)
+//#define byte char
+//#define byte unsigned char
 
 int main (int argc, char * argv[], char ** envp) {
 
-    char digit = 0;
-    int offset = ?;
-    int number = 0;
-    int bufferSize = 4;
-    char ascii_value[bufferSize];
-    
-    char retval = read(0, ascii_value, 1);
+    int digit;
+    int offset = 0x30; //0b11110 = %d 30
+    unsigned int number = 0;
+    int bufferSize = 8;
+    char ascii_value;
+    int retval;
 
-    while (retval == 1 || retval == 0)
+    retval = read(0, &ascii_value, 1);
+    printf("ret: %d\n", retval);
+
+    printf("read: %c\n", ascii_value);
+
+
+    while (retval == 1)
     {
+
         digit = ascii_value - offset;
-        number = number << 1 + digit;  
+        number = (number << 1) + digit;
+
+        printf("DIGIT: %d\n", digit);
+        printf("NUMBER: %d\n", number);
+
         retval = read(0, &ascii_value, 1);
 
-        bufferSize = bufferSize + 4;
+        printf("read: %c\n", ascii_value);
+        printf("ret: %d\n", retval);
+
+        if (ascii_value == '\n') {
+        retval = 0;
+        printf("ret FORCE ZERO: %d\n", retval);
+        }
+
     }
 
-    printf("%d\n", number);
+    printf("FINAL NUMBER: %u \n", number);
     return 0;
 
 }
