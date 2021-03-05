@@ -29,8 +29,7 @@ int main (int argc, char * argv[], char ** envp) {
 
     retval = read(0, &ascii_value, 1);
 
-    while (retval == 1)
-    {
+    while (retval == 1) {
 
         digit = ascii_value - offset;
         number = (number << 1) + digit;
@@ -38,24 +37,25 @@ int main (int argc, char * argv[], char ** envp) {
         retval = read(0, &ascii_value, 1);
 
         if (ascii_value == '\n') {
-        retval = 0;
+        	retval = 0;
         }
 
-	if ((ascii_value != '0') && (ascii_value != '1') && (ascii_value != '\n')) {
-	retval = 0; 
-	printf("ERROR: NON 1 OR 0 INPUT\n");
-	error = true;
+		if ((ascii_value != '0') && (ascii_value != '1') && (ascii_value != '\n')) { //intentionally checks again for newline to prevent ERROR caused by \n
+			retval = 0; 
+			printf("ERROR: NON 1 OR 0 INPUT\n");
+			error = true;
+		}
+
+    }
+
+	if (error == false) {
+
+    	printf("FINAL NUMBER: %u \n", number);
+    	return 0;
+
+    }
+
+	else {
+		return 1;
 	}
-
-    }
-
-if (error == false) {
-
-    printf("FINAL NUMBER: %u \n", number);
-    return 0;
-
-    }
-else {
-return 1;
-}
 }
